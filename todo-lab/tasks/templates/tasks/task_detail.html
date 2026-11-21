@@ -1,0 +1,47 @@
+
+{% extends 'tasks/base.html' %}
+
+{% block title %}Task Details{% endblock %}
+
+{% block content %}
+
+<h1>Task Details</h1>
+
+<div class="task">
+
+    <h2>{{ task.title }}</h2>
+
+    <p><strong>Description:</strong></p>
+
+    {% if task.description %}
+        <p>{{ task.description }}</p>
+    {% else %}
+        <p>No description provided.</p>
+    {% endif %}
+
+    <p>
+        <strong>Status:</strong>
+
+        {% if task.completed %}
+            <span class="completed">Completed</span>
+        {% else %}
+            <span class="pending">Pending</span>
+        {% endif %}
+    </p>
+
+    <p><strong>Created:</strong> {{ task.created_at }}</p>
+
+    <p><strong>Task ID:</strong> {{ task.pk }}</p>
+
+</div>
+
+<a href="{% url 'tasks:task_update' task.pk %}"
+   class="btn">Edit Task</a>
+
+<a href="{% url 'tasks:task_delete' task.pk %}"
+   class="btn delete-btn">Delete Task</a>
+
+<a href="{% url 'tasks:task_list' %}"
+   class="btn cancel-btn">Back</a>
+
+{% endblock %}

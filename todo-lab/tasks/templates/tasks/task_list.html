@@ -1,0 +1,47 @@
+
+{% extends 'tasks/base.html' %}
+
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+
+<h1>My Tasks</h1>
+
+<a href="{% url 'tasks:task_create' %}" class="btn">
+    + Add New Task
+</a>
+
+{% if tasks %}
+
+    {% for task in tasks %}
+
+        <div class="task">
+
+            <h3>{{ task.title }}</h3>
+
+            {% if task.completed %}
+                <p class="completed">Status: Completed</p>
+            {% else %}
+                <p class="pending">Status: Pending</p>
+            {% endif %}
+
+            <a href="{% url 'tasks:task_detail' task.pk %}"
+               class="btn">View</a>
+
+            <a href="{% url 'tasks:task_update' task.pk %}"
+               class="btn">Edit</a>
+
+            <a href="{% url 'tasks:task_delete' task.pk %}"
+               class="btn delete-btn">Delete</a>
+
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>You have no tasks yet. Click Add New Task to get started.</p>
+
+{% endif %}
+
+{% endblock %}

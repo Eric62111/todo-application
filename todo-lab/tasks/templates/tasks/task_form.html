@@ -1,0 +1,52 @@
+
+{% extends 'tasks/base.html' %}
+
+{% block title %}{{ action }} Task{% endblock %}
+
+{% block content %}
+
+<h1>{{ action }} Task</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div>
+        <label for="{{ form.title.id_for_label }}">
+            Task Title
+        </label>
+
+        {{ form.title }}
+        {{ form.title.errors }}
+    </div>
+
+    <div>
+        <label for="{{ form.description.id_for_label }}">
+            Description
+        </label>
+
+        {{ form.description }}
+        {{ form.description.errors }}
+    </div>
+
+    <div>
+        {{ form.completed }}
+        <label for="{{ form.completed.id_for_label }}">
+            Completed
+        </label>
+
+        {{ form.completed.errors }}
+    </div>
+
+    <button type="submit" class="btn">
+        Save Task
+    </button>
+
+    <a href="{% url 'tasks:task_list' %}"
+       class="btn cancel-btn">Cancel</a>
+
+</form>
+
+{% endblock %}
